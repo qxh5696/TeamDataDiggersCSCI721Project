@@ -20,9 +20,9 @@ def scrape_hotel_data(df, driver):
     hotel_name = driver.title.split('$')[0].title()
     price = re.search('\$(\d+)', driver.title).group(0) 
     primary_rating_tag = soup_expansion.find('span', class_='hotels-hotel-review-about-with-photos-Reviews__overallRating--vElGA')
-    primary_rating = primary_rating_tag.get_text()
+    primary_rating = Decimal(primary_rating_tag.get_text())
     ui_bubble_ratings = {}
-    for i in range(0, 50, 5):
+    for i in range(0, 55, 5):
         ui_bubble_ratings['bubble_' + str(i)] = i * 0.1
     secondary_ratings = soup_expansion.find_all('div', class_='hotels-hotel-review-about-with-photos-Reviews__subratingRow--2u0CJ')
     metrics = []
