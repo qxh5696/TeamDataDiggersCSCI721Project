@@ -9,6 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.proxy import *
 from joblib import load, dump 
 import pandas as pd
+from decimal import Decimal
 
 # Scrapes data off of each individual hotel page
 def scrape_hotel_data(df, driver):
@@ -27,7 +28,7 @@ def scrape_hotel_data(df, driver):
     metrics = []
     for rating in secondary_ratings:
         result = re.search('bubble_(\d\d)', str(rating))
-        metrics.append(int(ui_bubble_ratings[result.group(0)]))
+        metrics.append(Decimal(ui_bubble_ratings[result.group(0)]))
 
     amenities_tag = soup_expansion.find_all('div', class_='hotels-hr-about-amenities-Amenity__amenity--3fbBj')
     amenities = []
